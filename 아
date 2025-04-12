@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>슈론 블로그</title>
+  <style>
+    /* 기본 스타일 */
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #3c8dbc;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .content {
+      padding: 20px;
+    }
+    .post {
+      margin-bottom: 40px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 20px;
+    }
+    .post-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .post-meta {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    /* 뒤를 돌아보세요 텍스트 스타일 */
+    #turnBack {
+      cursor: pointer;
+      color: red;
+      font-size: 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    /* 귀신 이미지 초기 상태 */
+    #ghost {
+      position: fixed;
+      top: 10%;
+      right: -300px; /* 화면 밖으로 숨김 */
+      width: 250px;
+      opacity: 0;
+      transition: all 0.5s ease;
+      z-index: 1000;
+    }
+    /* 검은색 정사각형 커버 스타일 */
+    .cover {
+      position: relative;
+      background-color: black;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin: 20px 0;
+      color: transparent;
+    }
+    .cover.revealed {
+      background-color: transparent;
+    }
+    /* 탈출하기 탭 */
+    #escapeTab {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #3c8dbc;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      display: none;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>슈론 블로그</h1>
+  </div>
+
+  <div class="content">
+    <!-- 첫 번째 포스트 -->
+    <div class="post">
+      <div class="post-title">첫 번째 글</div>
+      <div class="post-meta">작성자: 이름없는 사람</div>
+      <p>
+        이것은 슈론 블로그의 첫 번째 포스트입니다. 이 글에서는 깜짝 놀람 이벤트로 <strong>뒤를 돌아보시는걸 추천드립니다</strong>
+      </p>
+      <div id="turnBack">뒤를 돌아보세요!</div>
+    </div>
+
+    <!-- 두 번째 포스트 -->
+    <div class="post">
+      <div class="post-title">두 번째 글</div>
+      <div class="post-meta">작성자: 이름없는 사람</div>
+      <p>
+        아래의 검은색 정사각형을 클릭해 보세요.
+      </p>
+      <div class="cover" id="coverSquare">
+        <span>검은색 정사각형</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 귀신 이미지 -->
+  <img id="ghost" src="https://i.imgur.com/O7M8aKP.png" alt="귀신 이미지">
+
+  <!-- 탈출하기 탭 -->
+  <div id="escapeTab">누군가 당신의 곁에 있나요?</div>
+
+  <script>
+    // 요소 가져오기
+    const turnBack = document.getElementById('turnBack');
+    const ghost = document.getElementById('ghost');
+    const coverSquare = document.getElementById('coverSquare');
+    const escapeTab = document.getElementById('escapeTab');
+
+    // "뒤를 돌아보세요!" 클릭 시 2초 후 귀신 등장
+    turnBack.addEventListener('click', function(){
+      setTimeout(function(){
+        ghost.style.right = '10px';
+        ghost.style.opacity = '1';
+      }, 2000); // 2000ms = 2초
+    });
+
+    // 검은색 정사각형 클릭 시 커버가 투명해지며 귀신 얼굴이 나타남, 이후 탈출하기 탭 등장
+    coverSquare.addEventListener('click', function(){
+      // 검은색 커버를 투명하게 변경
+      coverSquare.classList.add('revealed');
+      // 정사각형 안에 귀신 얼굴 이미지 추가 (크기는 필요에 따라 조절)
+      coverSquare.innerHTML = '<img src="https://i.imgur.com/O7M8aKP.png" alt="귀신 얼굴" style="width:50px;">';
+      // 탈출하기 탭 보이기
+      escapeTab.style.display = 'block';
+    });
+
+    // 탈출하기 탭 클릭 시 원하는 사이트(여기서는 www.google.com)로 이동
+    escapeTab.addEventListener('click', function(){
+      window.location.href = "theannoyingsite.com";
+    });
+  </script>
+</body>
+</html>
